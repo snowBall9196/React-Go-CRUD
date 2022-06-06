@@ -1,51 +1,45 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import UserService from '../services/UserService'
+import { useParams } from 'react-router-dom';
 
-class ViewUserComponent extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            id: this.props.match.params.id,
-            user: {}
-        }
-    }
-
-    componentDidMount(){
-        UserService.getUserById(this.state.id).then( res => {
-            this.setState({user: res.data});
+const ViewUserComponent = () => {
+    const [user, setUser] = useState({});
+    let { id } = useParams();
+    //setId(this.props.match.params.id);
+    useEffect(() => {
+        UserService.getUserById(id).then( res => {
+            setUser(res.data);
         })
-    }
+    }, []);
 
-    render() {
-        return (
-            <div>
-                <br></br>
-                <div className = "card col-md-6 offset-md-3">
-                    <h3 className = "text-center"> 
-                    View User Details</h3>
-                    <div className = "card-body">
-                        <div className = "row">
-                            <label> User First Name: </label>
-                            <div> { this.state.user.firstName }
-                            </div>
-                        </div>
-                        <div className = "row">
-                            <label> User Last Name: </label>
-                            <div> { this.state.user.lastName }
-                            </div>
-                        </div>
-                        <div className = "row">
-                            <label> User Email : </label>
-                            <div> { this.state.user.email }
-                            </div>
+    return (
+        <div>
+            <br></br>
+            <div className = "card col-md-6 offset-md-3">
+                <h3 className = "text-center"> 
+                View User Details</h3>
+                <div className = "card-body">
+                    <div className = "row">
+                        <label> User First Name: </label>
+                        <div> { user.firstName }
                         </div>
                     </div>
-
+                    <div className = "row">
+                        <label> User Last Name: </label>
+                        <div> { user.lastName }
+                        </div>
+                    </div>
+                    <div className = "row">
+                        <label> User Email : </label>
+                        <div> { user.email }
+                        </div>
+                    </div>
                 </div>
+
             </div>
-        )
-    }
+        </div>
+    )
+    
 }
 
 export default ViewUserComponent

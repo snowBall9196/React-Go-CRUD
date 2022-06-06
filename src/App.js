@@ -1,8 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {BrowserRouter as Router, Route, Switch} 
-      from 'react-router-dom'
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import ListUserComponent from './components/ListUserComponent';
 import HeaderComponent from './components/HeaderComponent';
 import FooterComponent from './components/FooterComponent';
@@ -12,23 +10,21 @@ import ViewUserComponent from './components/ViewUserComponent';
 function App() {
   return (
     <div>
-        <Router>
-              <HeaderComponent />
-                <div className="container">
-                    <Switch> 
-                          <Route path = "/" exact component =
-                              {ListUserComponent}></Route>
-                          <Route path = "/users" component = 
-                              {ListUserComponent}></Route>
-                          <Route path = "/add-user/:id" component = 
-                              {CreateUserComponent}></Route>
-                         <Route path = "/view-user/:id" component = 
-                              {ViewUserComponent}></Route>
-                         </Switch>
-                </div>
-              <FooterComponent />
-        </Router>
-    </div>
+      <HeaderComponent />
+        <div className="container">
+            <Routes> 
+                  <Route path = "/" exact element =
+                      {<ListUserComponent />}></Route>
+                  <Route path = "/users" element = 
+                      {<ListUserComponent />}></Route>
+                  <Route path = "/add-user/:id" element = 
+                      {<CreateUserComponent />}></Route>
+                  <Route path = "/view-user/:id" element = 
+                      {<ViewUserComponent />}></Route>
+            </Routes>
+        </div>
+      <FooterComponent />
+      </div>
     
   );
 }
